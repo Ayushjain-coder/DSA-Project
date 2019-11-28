@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<iostream>
+using namespace std;
+
+int CONTACTS[20];
+int FAVOURITE[10];
+int COUNT[20];
+int binary_search(int[],int,int);
+
+int main()
+{
+  int i,skey;	
+  for(i=0;i<20;i++)
+  {
+     CONTACTS[i]=0;
+	 COUNT[i]=0;	
+  }
+  
+  printf("Enter the contacts: ");
+  for(i=0;i<20;i++)
+  {
+    scanf("%d",&CONTACTS[i]);	
+  }
+  
+  for(i=0;i<10;i++)
+  {
+  	printf("Enter the search key: ");
+  	scanf("%d",&skey);
+    COUNT[skey]=COUNT[skey]+1;
+    if(COUNT[skey]>=2)
+    {
+       FAVOURITE[i]=skey;
+	}
+	if(binary_search(FAVOURITE,i,skey)==1)
+	{
+		printf("Your Element Is In FAVOURITE Array\n");
+	}
+	else if(binary_search(CONTACTS,20,skey)==1)
+	{
+		printf("Your Element Is In CONTACTS Array\n");
+	}
+	else
+	{
+		printf("Your Element Is Not In CONTACTS Array and FAVOURITE Array\n");
+	}
+  }
+}
+
+int binary_search(int a[],int h,int skey)
+{
+	int mid,low=0,high=h;
+	while(low<=high)
+	{
+		mid=(low+high)/2;
+		if(skey==a[mid])
+		{
+			return 1;
+		}
+		if(skey<a[mid])
+		{
+			high=mid-1;
+		}
+		else
+		{
+			low=mid+1;
+		}
+	}
+	return 0;
+}
